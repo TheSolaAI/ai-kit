@@ -8,6 +8,8 @@ import { SwapParams, SwapResponse } from '@/types/jupiter.types';
 const swapTokensParams = z.object({
   inputTokenAddress: z.string().describe('Token Address to swap from'),
   outputTokenAddress: z.string().describe('Token Address to swap to'),
+  inputTokenTicker: z.string().describe('Token Ticker to swap from'),
+  outputTokenTicker: z.string().describe('Token Ticker to swap to'),
   amount: z
     .number()
     .describe(
@@ -18,14 +20,17 @@ const swapTokensParams = z.object({
     .describe(
       'The type of swap: EXACT_IN specifies the amount of tokenA being swapped, EXACT_OUT specifies the amount of tokenB to receive, and EXACT_DOLLAR specifies the dollar amount to be swapped'
     ),
-  inputTokenTicker: z.string().describe('Token Ticker to swap from'),
-  outputTokenTicker: z.string().describe('Token Ticker to swap to'),
+  assetType: z
+    .enum(['TOKEN', 'XSTOCKS'])
+    .describe(
+      'The type of asset swapped. TOKEN specifies crypto tokens and XSTOCKS specifies xstock tokens'
+    ),
 });
 
 export const swapTokensToolFactory = createToolFactory(
   {
     description:
-      'Swaps a specified amount of one token for another token using Jupiter. Use this for all token swap operations except limit orders.',
+      'Swaps a specified amount of one token or xstocks for another token or xstocks using Jupiter. Use this for all token swap operations except limit orders.',
     parameters: swapTokensParams,
   },
   async (params, context: SolaKitToolContext) => {
