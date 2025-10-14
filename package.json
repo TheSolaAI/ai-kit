@@ -31,7 +31,7 @@
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
     "@typescript-eslint/parser": "^8.31.0",
-    "ai": "^4.3.9",
+    "ai": "^5.0.70",
     "commitlint": "^19.8.0",
     "concurrently": "^9.1.2",
     "eslint": "^9.25.1",
