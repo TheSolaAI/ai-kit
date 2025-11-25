@@ -5,13 +5,14 @@ import { getLimitOrderToolFactory } from './getLimitOrder';
 import { bubblemapToolFactory } from './bubblemaps';
 import { tokenAddressToolFactory } from './tokenAddress';
 import { topHoldersToolFactory } from './topHolders';
+import { getTopXStocksToolFactory } from './getTopXStocks';
 
 // Define the toolset using the factory pattern
 export const tokenToolSetFactory = createToolSetFactory(
   {
     slug: 'token',
     name: 'Crypto Tokens',
-    description: `Tools for providing information on crypto tokens inside the Solana 
+    description: `Tools for providing information on crypto tokens and xstocs inside the Solana 
       Block chain ecosystem (realtime token data, top holders, bubblemaps), for placing limitOrders and getting information
       on placed limitOrders`,
   },
@@ -22,5 +23,6 @@ export const tokenToolSetFactory = createToolSetFactory(
     bubblemap: bubblemapToolFactory,
     tokenAddress: tokenAddressToolFactory,
     topHolders: topHoldersToolFactory,
+    getTopXStocks: getTopXStocksToolFactory,
   }
 );

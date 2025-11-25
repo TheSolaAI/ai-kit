@@ -122,6 +122,9 @@ export const API_URLS = {
       SYMBOL: 'data/nft/symbol',
       TOP_NFT: 'data/nft/top',
     },
+    XSTOCKS: {
+      TOP_XSTOCKS: 'data/xstocks/top_stocks',
+    },
   },
   WALLET: {
     LIMIT_ORDER: {
