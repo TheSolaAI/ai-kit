@@ -33,7 +33,7 @@ export {
 } from './stakingToolSet';
 
 // API Client Exports
-
+export { ApiClient, createApiClient } from './apiClient';
 export type { ApiResponse, ApiError } from '@/types/api.types';
 
 // Re-export the options type for easier access
