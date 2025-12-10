@@ -886,6 +886,16 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
+"@sola-labs/ai-kit@file:":
+  version "0.1.16"
+  resolved "file:"
+  dependencies:
+    "@sola-labs/ai-kit" "file:"
+    "@solana/web3.js" "^1.98.2"
+    axios "^1.9.0"
+    axios-retry "^4.5.0"
+    zod "^3.25.76"
+
 "@solana/buffer-layout@^4.0.1":
   version "4.0.1"
   resolved "https://registry.npmjs.org/@solana/buffer-layout/-/buffer-layout-4.0.1.tgz"

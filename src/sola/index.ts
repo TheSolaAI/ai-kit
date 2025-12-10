@@ -12,7 +12,6 @@ import { tokenToolSetFactory } from './tokenToolSet';
 
 // Tool Set Exports (all tools including lulo can be imported individually)
 export { aiProjectsToolSetFactory } from './aiProjectsToolSet';
-export { luloToolSetFactory } from './luloToolSet';
 export { nftToolSetFactory } from './nftToolSet';
 export { onChainToolSetFactory } from './onChainToolSet';
 export { stakingToolSetFactory } from './stakingToolSet';

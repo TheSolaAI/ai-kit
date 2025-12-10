@@ -15,7 +15,6 @@ export * from './types/tools.types';
 // Re-export sola module (excluding SOLA_KIT_TOOLS initially to avoid circular deps)
 export {
   aiProjectsToolSetFactory,
-  luloToolSetFactory,
   nftToolSetFactory,
   onChainToolSetFactory,
   stakingToolSetFactory,
@@ -27,6 +26,21 @@ export {
   tokenList,
   getAllToolSetFactories,
 } from './sola';
+
+let _luloToolSetFactory: any;
+export const luloToolSetFactory = (...args: any[]) => {
+  if (!_luloToolSetFactory) {
+    throw new Error(
+      'luloToolSetFactory not initialized. Use getAllToolSetFactories() instead.'
+    );
+  }
+  return _luloToolSetFactory(...args);
+};
+
+// Load it lazily
+import('./sola/luloToolSet').then(({ luloToolSetFactory: f }) => {
+  _luloToolSetFactory = f;
+});
 
 export type {
   SolaKitToolContext,
