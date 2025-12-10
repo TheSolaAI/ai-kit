@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { createToolFactory } from '@/tools';
-import { API_URLS, SolaKitToolContext } from '..';
+import { API_URLS } from '../constants';
+import { SolaKitToolContext } from '../types';
 import { AssetsParams, AssetsResponse } from '@/types/lulo.types';
 import { ApiClient } from '../apiClient';
 
