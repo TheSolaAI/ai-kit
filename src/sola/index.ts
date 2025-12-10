@@ -5,13 +5,12 @@
  */
 
 import { aiProjectsToolSetFactory } from './aiProjectsToolSet';
-import { luloToolSetFactory } from './luloToolSet';
 import { nftToolSetFactory } from './nftToolSet';
 import { onChainToolSetFactory } from './onChainToolSet';
 import { stakingToolSetFactory } from './stakingToolSet';
 import { tokenToolSetFactory } from './tokenToolSet';
 
-// Tool Set Exports
+// Tool Set Exports (all tools including lulo can be imported individually)
 export { aiProjectsToolSetFactory } from './aiProjectsToolSet';
 export { luloToolSetFactory } from './luloToolSet';
 export { nftToolSetFactory } from './nftToolSet';
@@ -41,32 +40,9 @@ export type ApiClientOptions = {
   dataServiceUrl?: string;
   walletServiceUrl?: string;
   goatIndexServiceUrl?: string;
+  nextjsServiceUrl?: string;
   enableLogging?: boolean;
 };
-
-/**
- * Example usage:
- *
- * ```typescript
- * import { createApiClient } from '';
- *
- * // Initialize the API client
- * const apiClient = createApiClient({
- *   dataServiceUrl: 'https://api.example.com/data',
- *   walletServiceUrl: 'https://api.example.com/wallet',
- *   goatIndexServiceUrl: 'https://api.example.com/goat-index',
- *   enableLogging: true
- * });
- *
- * // Use in your application context
- * const context = {
- *   tools: {
- *     apiClient,
- *     // ... other tools
- *   }
- * };
- * ```
- */
 
 /**
  * Context type specifically designed for SolanaKit tools.
@@ -76,15 +52,38 @@ export type ApiClientOptions = {
 export type { SolaKitToolContext } from './types';
 
 /**
- * All Sola Kit toolset factories combined in a single array for convenience
+ * All Sola Kit toolset factories combined in a single array for convenience.
+ *
+ * NOTE: This array is evaluated during module initialization, so any toolsets
+ * with circular dependencies should be lazy-loaded separately.
  */
 export const SOLA_KIT_TOOLS = [
   aiProjectsToolSetFactory,
-  luloToolSetFactory,
   nftToolSetFactory,
   onChainToolSetFactory,
   stakingToolSetFactory,
   tokenToolSetFactory,
 ];
+
+/**
+ * Get all toolset factories including those that need lazy-loading.
+ * This function safely imports lulo after all other modules are initialized.
+ *
+ * @example
+ * ```typescript
+ * import { getAllToolSetFactories } from '@sola-labs/ai-kit';
+ *
+ * const toolsetFactories = getAllToolSetFactories();
+ * // Use with AIKit
+ * const aiKit = new AIKit({
+ *   toolSetFactories: toolsetFactories,
+ *   // ... other options
+ * });
+ * ```
+ */
+export async function getAllToolSetFactories() {
+  const { luloToolSetFactory } = await import('./luloToolSet');
+  return [...SOLA_KIT_TOOLS, luloToolSetFactory];
+}
 
 export { API_URLS, GOAT_INDEX_API_URL, tokenList } from './constants';

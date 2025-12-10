@@ -8,10 +8,32 @@ import {
 } from 'ai';
 import { BaseToolContext, ToolSet } from './types/tools.types';
 import z from 'zod';
+
 // Re-export types
 export * from './types/tools.types';
-// Re-export sola module
-export * from './sola';
+
+// Re-export sola module (excluding SOLA_KIT_TOOLS initially to avoid circular deps)
+export {
+  aiProjectsToolSetFactory,
+  luloToolSetFactory,
+  nftToolSetFactory,
+  onChainToolSetFactory,
+  stakingToolSetFactory,
+  tokenToolSetFactory,
+  ApiClient,
+  createApiClient,
+  API_URLS,
+  GOAT_INDEX_API_URL,
+  tokenList,
+  getAllToolSetFactories,
+} from './sola';
+
+export type {
+  SolaKitToolContext,
+  ApiResponse,
+  ApiError,
+  ApiClientOptions,
+} from './sola';
 
 // Re-export staking schemas for runtime validation
 export {
@@ -41,6 +63,9 @@ export type {
   NativeUnstakingStakingResult,
   ValidatorListResult,
 } from './sola/stakingToolSet/types';
+
+// Export SOLA_KIT_TOOLS separately to avoid circular dependency during module init
+export { SOLA_KIT_TOOLS } from './sola';
 
 export const ORCHESTRATION_DEFAULT_SYSTEM_PROMPT = `
 Based on the toolsets and their tools provided, determine the best toolset to use for the given prompt.
